@@ -3,6 +3,7 @@ use piston_window::{Context, G2d};
 use piston_window::types::Color;
 use super::draw::draw_block;
 
+// RGBA
 const SNAKE_COLOR: Color = [0.00,0.80,0.00,1.0];
 
 #[derive(Clone,Copy,Debug,PartialEq)]
@@ -113,5 +114,22 @@ impl Snake{
         let blk = self.tail.clone().unwrap();
         self.body.push_back(blk);
     }
+    
+    pub fn overlap_tail(&self, x:i32, y:i32) -> bool {
+        let mut ch = 0;
+        for block in &self.body {
+            if x == block.x && y == block.y{
+                return true;
+            }
+
+            ch +=1;
+            if ch == self.body.len() - 1 {
+                break;
+            }
+        }
+        return false;
+    }
+
+
 
 }
