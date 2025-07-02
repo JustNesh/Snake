@@ -51,6 +51,10 @@ impl Game {
             _any_other_key => None,
         };
 
+        if dir.is_none(){
+            return;
+        }
+
         if dir.unwrap() == self.snake.head_direction().opposite() {
             return;
         }
@@ -119,8 +123,8 @@ impl Game {
         let mut new_x = rng.gen_range(1..self.width - 1);
         let mut new_y = rng.gen_range(1..self.height - 1);
         while self.snake.overlap_tail(new_x, new_y){
-            new_x = rng.gen_range(1..=self.width -1);
-            new_y = rng.gen_range(1..=self.height - 1);
+            new_x = rng.gen_range(1..self.width -1);
+            new_y = rng.gen_range(1..self.height - 1);
         }
 
         self.food_x = new_x;
